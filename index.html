@@ -11,6 +11,7 @@
     <div id="root">
         <h1 v-bind:class="className">Hello World</h1>
         <button v-bind:title="title" v-on:click="toggleClass" v-bind:class=" { 'is-loading': isLoading } ">Toggle me</button>
+        <button v-bind:disabled="isDisabled" v-on:click="disable" >Disable me</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
@@ -24,11 +25,15 @@
             data: {
                 className: 'color-red',
                 title: 'The title is being displayed',
-                isLoading: false
+                isLoading: false,
+                isDisabled: false
             },
             methods: {
                 toggleClass() {
                     this.isLoading = true;
+                },
+                disable() {
+                    this.isDisabled = true;
                 }
             }
         });
