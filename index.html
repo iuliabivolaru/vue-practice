@@ -9,34 +9,11 @@
 
 <body>
     <div id="root">
-        <h1 v-bind:class="className">Hello World</h1>
-        <button v-bind:title="title" v-on:click="toggleClass" v-bind:class=" { 'is-loading': isLoading } ">Toggle me</button>
-        <button v-bind:disabled="isDisabled" v-on:click="disable" >Disable me</button>
+        <task-list></task-list>
+        
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-    <script>
-        let data = {
-            message: 'Hello World'
-        };
-
-        var app = new Vue({
-            el: '#root',
-            data: {
-                className: 'color-red',
-                title: 'The title is being displayed',
-                isLoading: false,
-                isDisabled: false
-            },
-            methods: {
-                toggleClass() {
-                    this.isLoading = true;
-                },
-                disable() {
-                    this.isDisabled = true;
-                }
-            }
-        });
-
-    </script>
+    <script src="main.js"></script>
+   
 </body>
