@@ -1,14 +1,16 @@
 <head>
     <title></title>
+<style>
+    .color-red { color: red; }
+    .color-blue { color: blue; }
+    .is-loading { background: red }
+</style>
 </head>
 
 <body>
     <div id="root">
-        <ul>
-            <li v-for="name in names" v-text="name"></li>
-        </ul>
-        <input id="input" type="text" v-model="newName" v-on:keyUp="addName">
-        <button id="button" v-on:click="addName">Add name</button>
+        <h1 v-bind:class="className">Hello World</h1>
+        <button v-bind:title="title" v-on:click="toggleClass" v-bind:class=" { 'is-loading': isLoading } ">Toggle me</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
@@ -20,12 +22,13 @@
         var app = new Vue({
             el: '#root',
             data: {
-                newName: '',
-                names: ['Joe', 'Mary', 'Jane', 'Jack']
-            }, 
+                className: 'color-red',
+                title: 'The title is being displayed',
+                isLoading: false
+            },
             methods: {
-                addName() {
-                    this.names.push(this.newName);
+                toggleClass() {
+                    this.isLoading = true;
                 }
             }
         });
