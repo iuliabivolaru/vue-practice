@@ -10,7 +10,10 @@
 
 <body>
     <div id="root" class="container">
-        <message title="Hello World" body="bla bla car"></message>
+        <modal v-if="showModal" @close="showModal = false">
+            Insert any text, it will be written inside the slot tag of the component
+        </modal>
+        <button @click="showModal = true">Show modal</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
