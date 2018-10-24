@@ -1,0 +1,16 @@
+<template>
+    <div class="panel-body">
+        Example {{msg}}
+    </div>
+</template>
+
+<script>
+export default {
+  name: 'hello',
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App'
+    }
+  }
+}
+</script>
