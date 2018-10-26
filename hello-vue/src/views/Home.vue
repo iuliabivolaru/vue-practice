@@ -1,16 +1,44 @@
 <template>
-    <div class="panel-body">
-        Example {{msg}}
+    <div class="container" style="padding: 40px; padding-left: 10px; ">
+      <div class="columns">
+        <div class="column">
+          <div class="message" v-for="status in statuses">
+            <div class="message-header">
+              <p>
+                {{status.user.name}} said...
+              </p>
+              <p>
+                A moment ago...
+              </p>
+            </div>
+
+            <div class="message-body" v-text="status.body"></div>
+          </div>
+        </div>
+      </div>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'hello',
-  data () {
+  name: "hello",
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+      statuses: [
+        {
+          user: {
+            name: "John"
+          },
+          body: "Story of my life"
+        },
+        {
+          user: {
+            name: "Janine Doe"
+          },
+          body: "Second story of my life"
+        }
+      ]
+    };
   }
-}
+};
 </script>
