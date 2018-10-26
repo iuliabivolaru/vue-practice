@@ -8,7 +8,7 @@
                 {{status.user.name}} said...
               </p>
               <p>
-                A moment ago...
+                {{postedOn(status)}}
               </p>
             </div>
 
@@ -20,8 +20,9 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
-  name: "hello",
+  name: "statuses",
   data() {
     return {
       statuses: [
@@ -29,16 +30,23 @@ export default {
           user: {
             name: "John"
           },
-          body: "Story of my life"
+          body: "Story of my life",
+          created_at: "2018-10-26"
         },
         {
           user: {
             name: "Janine Doe"
           },
-          body: "Second story of my life"
+          body: "Second story of my life",
+          created_at: "2018-10-25"
         }
       ]
     };
+  },
+  methods: {
+    postedOn(status) {
+      return moment(status.created_at).fromNow();
+    }
   }
 };
 </script>
