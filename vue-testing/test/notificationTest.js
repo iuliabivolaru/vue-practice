@@ -1,7 +1,9 @@
-import Vue from 'vue';
+import Vue from 'vue/dist/vue.js';
 import test from 'ava';
 import notification from '../src/notification';
 
 test('that it renders a notification', t => {
-    t.is(notification.data().message, 'Hello world');
+    let n = new Vue(notification).$mount();
+
+    console.log(n.$el.innerHtml);
 });
