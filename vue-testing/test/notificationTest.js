@@ -2,8 +2,15 @@ import Vue from 'vue/dist/vue.js';
 import test from 'ava';
 import notification from '../src/notification';
 
-test('that it renders a notification', t => {
-    let n = new Vue(notification).$mount();
+let vm;
+test.beforeEach(t => {
+    let n = Vue.extend(notification);
 
-    console.log(n.$el.innerHtml);
+    vm = new n({ propsData: {
+        message: 'Hello world'
+    }}).$mount();
+})
+
+test('that it capitalizes the message', t => {
+    t.is(vm.$el.textContent, 'foobar');
 });

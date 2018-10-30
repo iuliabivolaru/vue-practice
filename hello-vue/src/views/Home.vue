@@ -2,7 +2,7 @@
     <div class="container" style="padding: 40px; padding-left: 10px; ">
       <div class="columns">
         <div class="column">
-          <div class="message" v-for="status in statuses">
+          <div class="message" v-for="status in statuses" :key="status">
             <div class="message-header">
               <p>
                 {{status.user.name}} said...
