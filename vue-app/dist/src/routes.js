@@ -15,7 +15,7 @@ var models = {
 function RegisterRoutes(server) {
     server.route({
         method: 'get',
-        path: '/api/v1/posts',
+        path: '/posts',
         options: {
             handler: function (request, h) {
                 var args = {};

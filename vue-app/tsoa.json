@@ -1,6 +1,6 @@
 {
     "routes": {
-        "basePath": "/api/v1",
+        "basePath": "/",
         "entryFile": "./src/index.ts",
         "middleware": "hapi",
         "routesDir": "./src"

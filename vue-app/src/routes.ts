@@ -15,7 +15,7 @@ const models: TsoaRoute.Models = {
 export function RegisterRoutes(server: any) {
     server.route({
         method: 'get',
-        path: '/api/v1/posts',
+        path: '/posts',
         options: {
             handler: (request: any, h: any) => {
                 const args = {
