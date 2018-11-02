@@ -2,17 +2,18 @@
     <div class="container" style="padding: 40px; padding-left: 10px; ">
       <div class="columns">
         <div class="column">
-          <div class="message">
-            <div class="message-header" v-for="status in statuses" v-bind:key="status">
+          <div class="message" v-for="status in statuses" v-bind:key="status.title">
+            <div class="message-header">
               <p>
-                 {{status.content}} said...
+                 {{status.title}} 
               </p>
               <p>
-                <!-- {{postedOn(status)}} -->
+                {{postedOn(status)}}
               </p>
             </div>
 
-            <div class="message-body" ></div>
+            <div class="message-body" v-text="status.content">
+            </div>
           </div>
         </div>
       </div>
