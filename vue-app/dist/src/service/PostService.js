@@ -10,6 +10,9 @@ var PostService = /** @class */ (function () {
     PostService.prototype.retrieve = function () {
         return PostRepository_1.default.retrieve();
     };
+    PostService.prototype.post = function (tweet) {
+        return PostRepository_1.default.post(tweet);
+    };
     return PostService;
 }());
 exports.default = new PostService();

@@ -28,4 +28,5 @@ var SuperController = /** @class */ (function (_super) {
     return SuperController;
 }(tsoa_1.Controller));
 exports.SuperController = SuperController;
+exports.default = new SuperController();
 //# sourceMappingURL=SuperController.js.map

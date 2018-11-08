@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tsoa_1 = require("tsoa");
 var PostController_1 = require("./controller/PostController");
 var models = {
-    "Post": {
+    "Tweet": {
         "properties": {
             "title": { "dataType": "string", "required": true },
             "content": { "dataType": "string", "required": true },

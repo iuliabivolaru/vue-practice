@@ -3,12 +3,13 @@ import { Controller } from 'tsoa';
 
 export class SuperController extends Controller {
 
-    protected setCreatedHTTPStatus(): void {
+    setCreatedHTTPStatus(): void {
         this.setStatus(201);
     }
 
-    protected setNoContentHTTPStatus(): void {
+    setNoContentHTTPStatus(): void {
         this.setStatus(204);
     }
 
 }
+export default new SuperController();

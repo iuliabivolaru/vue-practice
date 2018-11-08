@@ -16,7 +16,7 @@ module.exports = {
           'vue-style-loader',
           'css-loader'
         ],
-      },      {
+      }, {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
@@ -28,7 +28,19 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        // exclude: /node_modules/,
+        query: {
+          presets: ['es2015']
+        }
+      },
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        // exclude: /node_modules/,
+        options: {
+          // disable type checker - we will use it in fork plugin
+          transpileOnly: true 
+        }
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -43,7 +55,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
     },
-    extensions: ['*', '.js', '.vue', '.json']
+    extensions: ['*', '.js', '.ts', '.vue', '.json']
   },
   devServer: {
     historyApiFallback: true,

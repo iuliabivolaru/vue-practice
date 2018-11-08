@@ -4,7 +4,7 @@ import { Controller, ValidateParam, FieldErrors, ValidateError, TsoaRoute } from
 import { PostController } from './controller/PostController';
 
 const models: TsoaRoute.Models = {
-    "Post": {
+    "Tweet": {
         "properties": {
             "title": { "dataType": "string", "required": true },
             "content": { "dataType": "string", "required": true },

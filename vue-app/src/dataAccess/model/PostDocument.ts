@@ -1,6 +1,6 @@
-import {Document} from 'mongoose';
-import {Post} from '../../model/Post';
+import { Document } from 'mongoose';
+import { Tweet } from '../../model/Tweet';
 
-export interface PostDocument extends Post, Document {
+export interface PostDocument extends Tweet, Document {
 
 }

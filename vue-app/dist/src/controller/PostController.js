@@ -30,13 +30,32 @@ var PostController = /** @class */ (function (_super) {
     function PostController() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    // @SuccessResponse('201')
+    // @Post()
+    // public post(@Body() tweet: any): void {
+    //     console.info(`Posting => ` + JSON.stringify(tweet));
+    // console.info(`Posting => ` + tweet.title);
+    // var deserializedTweet = JSON.parse(tweet);
+    // for (var propName in deserializedTweet) {
+    //      console.info(deserializedTweet[propName]);
+    // }
+    // console.info(`Post =>` + deserializedTweet);
+    // this.setCreatedHTTPStatus();
+    //     return PostService.post(tweet)
+    //         .then((post: any) => {
+    //             console.info(`Posting => ${JSON.stringify(tweet)}`);
+    //             this.setStatus(201);
+    //         }).catch((err: any) => {
+    //             console.error(err.message);
+    //             throw err;
+    //         });
+    // }
     PostController.prototype.retrieve = function () {
         var _this = this;
         this.setCreatedHTTPStatus();
-        console.info("Received posts =>");
         return PostService_1.default.retrieve()
             .then(function (posts) {
-            console.info("Received posts => " + JSON.stringify(posts));
+            // console.info(`Received posts => ${JSON.stringify(posts)}`);
             if (posts.length) {
                 return posts;
             }

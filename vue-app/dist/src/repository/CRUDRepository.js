@@ -8,6 +8,9 @@ var CRUDRepository = /** @class */ (function () {
     CRUDRepository.prototype.retrieve = function (callback) {
         return this.model.find({}).exec();
     };
+    CRUDRepository.prototype.post = function (tweet) {
+        return this.model.create(tweet);
+    };
     return CRUDRepository;
 }());
 exports.CRUDRepository = CRUDRepository;
