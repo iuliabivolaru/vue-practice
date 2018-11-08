@@ -94,7 +94,7 @@ var HapiApp = /** @class */ (function () {
                     .then(function (post) {
                     console.info("Posting => " + JSON.stringify(tweet));
                     SuperController_1.default.setStatus(201);
-                    return;
+                    return post;
                 }).catch(function (err) {
                     console.error(err.message);
                     throw err;

@@ -49,7 +49,7 @@ class HapiApp {
                     .then((post: any) => {
                         console.info(`Posting => ${JSON.stringify(tweet)}`);
                         SuperController.setStatus(201);
-                        return;
+                        return post;
                     }).catch((err: any) => {
                         console.error(err.message);
                         throw err;
