@@ -1,16 +1,16 @@
 <template>
-    <div class="container" style="padding: 40px; padding-left: 10px; ">
+    <div class="container" style="padding: 40px; padding-left: 10px;">
       <div class="columns">
         <div class="column is-full">
           <form @submit="checkForm" action="http://localhost:3000/posts" method="postTweet">
               <div>
                 <input class="input is-rounded" type="text" placeholder="What's your story?" v-model="tweet.title">
               </div>
-              <p class="help is-danger margin" v-if="error.titleError.length">{{error.titleError}}</p>
+              <p class="help is-danger margin" v-if="error.titleError">{{error.titleError}}</p>
               <div>
                 <textarea class="textarea is-rounded" style="margin-top:1%" type="text" placeholder="Write some thoughts here..." v-model="tweet.content"></textarea>
               </div>
-              <p class="help is-danger margin" v-if="error.contentError.length">{{error.contentError}}</p>
+              <p class="help is-danger margin" v-if="error.contentError">{{error.contentError}}</p>
                 <input class="button is-normal is-pulled-right" type="submit" value="Post" style="margin-top:1%;margin-right:1.9%">
           </form>
         </div>
@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       tweets: [],
-      tweet: {},
+      tweet: { title: "", content: "" },
       error: { titleError: "", contentError: "" }
     };
   },
@@ -87,7 +87,7 @@ export default {
       });
     },
     clearForm() {
-      this.tweet = {};
+      this.tweet = { title: "", content: "" };
       this.error = { titleError: "", contentError: "" };
     }
   }
