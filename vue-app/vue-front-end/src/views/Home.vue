@@ -1,17 +1,18 @@
 <template>
     <div class="container" style="padding: 40px; padding-left: 10px; ">
       <div class="columns">
-        <div class="column is-full" style="background-color:white">
-          <div class="message">
-            <div class="message-header" style="background-color:white">
-              <input class="input is-rounded" type="text" placeholder="What's your story?" v-model="tweet.title">
-              {{tweet.title}}
-            </div>
-            <div class="message-body" style="background-color:white;padding:0.1em 1.0em;">
-              <textarea class="textarea is-rounded" type="text" placeholder="Write some thoughts here..." v-model="tweet.content"></textarea>
-            </div>
-              <a class="button is-normal is-pulled-right" style="margin-top:1%;padding:0.5em 1.0em;margin-right:1.9%" v-on:click="postTweet()">Post</a>
-          </div>
+        <div class="column is-full">
+          <form @submit="checkForm" action="http://localhost:3000/posts" method="postTweet">
+              <div>
+                <input class="input is-rounded" type="text" placeholder="What's your story?" v-model="tweet.title">
+              </div>
+              <p class="help is-danger margin" v-if="error.titleError.length">{{error.titleError}}</p>
+              <div>
+                <textarea class="textarea is-rounded" style="margin-top:1%" type="text" placeholder="Write some thoughts here..." v-model="tweet.content"></textarea>
+              </div>
+              <p class="help is-danger margin" v-if="error.contentError.length">{{error.contentError}}</p>
+                <input class="button is-normal is-pulled-right" type="submit" value="Post" style="margin-top:1%;margin-right:1.9%">
+          </form>
         </div>
       </div>
           <div class="message" v-for="(t, index) in tweets" v-bind:key="index">
@@ -35,15 +36,15 @@ import axios from "axios";
 import { error } from "util";
 import { Tweet } from "../Tweet";
 export default {
-  name: "statuses",
+  name: "tweets",
   data() {
     return {
       tweets: [],
-      tweet: {}
+      tweet: {},
+      error: { titleError: "", contentError: "" }
     };
   },
-  created() {
-    //this.postTweet();
+  mounted() {
     this.getTweets();
   },
   methods: {
@@ -60,21 +61,34 @@ export default {
         data: params
       })
         .then(response => {
-          console.log(response.data);
           return response.data;
         })
         .catch(error => {
-          console.log("Error" + JSON.stringify(error.response));
           return error;
         });
+      this.clearForm();
     },
-
+    checkForm(e) {
+      if (!this.tweet.title) {
+        this.error.titleError = "Please choose a title for your story";
+      }
+      if (!this.tweet.content) {
+        this.error.contentError = "Please write a few ideas from your story";
+      }
+      if (this.tweet.title && this.tweet.content) {
+        this.postTweet();
+      }
+      e.preventDefault();
+    },
     getTweets() {
       axios.get("http://localhost:3000/posts").then(response => {
-        console.log(response.data);
         this.tweets = response.data;
         return;
       });
+    },
+    clearForm() {
+      this.tweet = {};
+      this.error = { titleError: "", contentError: "" };
     }
   }
 };
