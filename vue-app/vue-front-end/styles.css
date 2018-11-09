@@ -1,4 +1,8 @@
 .help.is-danger.margin {
     margin-left:2%;
     margin-bottom:1%;
-}  
+}
+
+.message-header.background {
+    background-color: #6b5b95
+}

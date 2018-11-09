@@ -16,7 +16,7 @@
         </div>
       </div>
           <div class="message" v-for="(t, index) in tweets" v-bind:key="index">
-            <div class="message-header">
+            <div class="message-header background">
               <p>
                  {{t.title}} 
               </p>
