@@ -26,6 +26,7 @@
             </div>
             <div class="message-body" v-text="t.content">
             </div>
+            <i class="fa fa-thumbs-up" style="margin-left:2%;margin-bottom:2%"></i>
           </div>
     </div>
 </template>
