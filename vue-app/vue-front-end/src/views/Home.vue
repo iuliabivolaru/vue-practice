@@ -26,7 +26,7 @@
             </div>
             <div class="message-body" v-text="t.content">
             </div>
-            <i class="fa fa-thumbs-up" style="margin-left:2%;margin-bottom:2%"></i>
+            <i class="fa fa-thumbs-up" style="margin-left:2%;margin-bottom:2%" v-on:click="like(t)">  {{t.likesNumber}} people</i>
           </div>
     </div>
 </template>
@@ -41,7 +41,7 @@ export default {
   data() {
     return {
       tweets: [],
-      tweet: { title: "", content: "" },
+      tweet: { title: "", content: "", createdAt: null, likesNumber: 0 },
       error: { titleError: "", contentError: "" }
     };
   },
@@ -49,13 +49,15 @@ export default {
     this.getTweets();
   },
   methods: {
-    postedOn(status) {
-      return moment(status.created_at).fromNow();
+    postedOn(tweet) {
+      return moment(tweet.createdAt).fromNow();
     },
     postTweet() {
       const params = new URLSearchParams();
       params.append("title", this.tweet.title);
       params.append("content", this.tweet.content);
+      params.append("createdAt", moment().toDate());
+      params.append("likesNumber", this.tweet.likesNumber);
       axios({
         method: "post",
         url: "http://localhost:3000/posts",
@@ -68,6 +70,23 @@ export default {
           return error;
         });
       this.clearForm();
+    },
+    like(tweet) {
+      console.log("put tweet");
+      const params = new URLSearchParams();
+      params.append("title", tweet.title);
+      params.append("content", tweet.content);
+      params.append("createdAt", tweet.createdAt);
+      params.append("likesNumber", ++tweet.likesNumber);
+      axios
+        .post("http://localhost:3000/likes", params)
+        .then(response => {
+          console.log("PUT response:" + JSON.stringify(response));
+          return response.data;
+        })
+        .catch(error => {
+          return error;
+        });
     },
     checkForm(e) {
       if (!this.tweet.title) {

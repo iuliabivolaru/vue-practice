@@ -11,6 +11,9 @@ var CRUDRepository = /** @class */ (function () {
     CRUDRepository.prototype.post = function (tweet) {
         return this.model.create(tweet);
     };
+    CRUDRepository.prototype.put = function (tweet) {
+        return this.model.findOneAndUpdate(tweet.createdAt, tweet, { new: true }).exec();
+    };
     return CRUDRepository;
 }());
 exports.CRUDRepository = CRUDRepository;

@@ -3,37 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // TODO: Replace this with HAPI middleware stuff
 /* tslint:disable */
 var tsoa_1 = require("tsoa");
-var PostController_1 = require("./controller/PostController");
-var models = {
-    "Tweet": {
-        "properties": {
-            "title": { "dataType": "string", "required": true },
-            "content": { "dataType": "string", "required": true },
-        },
-    },
-};
+var models = {};
 function RegisterRoutes(server) {
-    server.route({
-        method: 'get',
-        path: '/posts',
-        options: {
-            handler: function (request, h) {
-                var args = {};
-                var validatedArgs = [];
-                try {
-                    validatedArgs = getValidatedArgs(args, request);
-                }
-                catch (err) {
-                    return h
-                        .response(err)
-                        .code(err.status || 500);
-                }
-                var controller = new PostController_1.PostController();
-                var promise = controller.retrieve.apply(controller, validatedArgs);
-                return promiseHandler(controller, promise, request, h);
-            }
-        }
-    });
     function isController(object) {
         return 'getHeaders' in object && 'getStatus' in object && 'setStatus' in object;
     }

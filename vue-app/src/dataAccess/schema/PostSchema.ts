@@ -9,6 +9,14 @@ let postSchema: Schema = new Schema({
     content: {
         type: String,
         required: true
+    },
+    createdAt: {
+        type: Date,
+        required: true
+    },
+    likesNumber: {
+        type: String,
+        required: false
     }
 }, { collection: 'posts' });
 

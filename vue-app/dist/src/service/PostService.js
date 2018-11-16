@@ -13,6 +13,9 @@ var PostService = /** @class */ (function () {
     PostService.prototype.post = function (tweet) {
         return PostRepository_1.default.post(tweet);
     };
+    PostService.prototype.put = function (tweet) {
+        return PostRepository_1.default.put(tweet);
+    };
     return PostService;
 }());
 exports.default = new PostService();

@@ -58,9 +58,6 @@ var HapiApp = /** @class */ (function () {
             host: 'localhost',
             port: 3000
         });
-        // this.registerBodyParser(this.server).then(
-        //   () => {
-        //        RegisterRoutes(this.server);
         this.server.route({
             method: 'GET',
             path: '/posts',
@@ -68,7 +65,6 @@ var HapiApp = /** @class */ (function () {
                 SuperController_1.default.setCreatedHTTPStatus();
                 return PostService_1.default.retrieve()
                     .then(function (posts) {
-                    // console.info(`Received posts => ${JSON.stringify(posts)}`);
                     if (posts.length) {
                         return posts;
                     }
@@ -84,10 +80,11 @@ var HapiApp = /** @class */ (function () {
             method: 'POST',
             path: '/posts',
             handler: function (request, h) {
-                console.log("ggggg");
                 var tweet = new Tweet_1.Tweet();
                 tweet.title = request.payload.title;
                 tweet.content = request.payload.content;
+                tweet.likesNumber = request.payload.likesNumber;
+                tweet.createdAt = request.payload.createdAt;
                 SuperController_1.default.setCreatedHTTPStatus();
                 console.info("Tweet" + JSON.stringify(tweet));
                 return PostService_1.default.post(tweet)
@@ -99,14 +96,34 @@ var HapiApp = /** @class */ (function () {
                     console.error(err.message);
                     throw err;
                 });
-                console.info("Posting => " + JSON.stringify(tweet));
+                return tweet;
+            }
+        });
+        this.server.route({
+            method: 'POST',
+            path: '/likes',
+            handler: function (request, h) {
+                var tweet = new Tweet_1.Tweet();
+                tweet.title = request.payload.title;
+                tweet.content = request.payload.content;
+                tweet.likesNumber = request.payload.likesNumber;
+                tweet.createdAt = request.payload.createdAt;
+                SuperController_1.default.setCreatedHTTPStatus();
+                console.info("Tweet" + JSON.stringify(tweet));
+                return PostService_1.default.put(tweet)
+                    .then(function (post) {
+                    console.info("Putting => " + JSON.stringify(tweet));
+                    SuperController_1.default.setStatus(201);
+                    return post;
+                }).catch(function (err) {
+                    console.error(err.message);
+                    throw err;
+                });
                 return tweet;
             }
         });
         DataAccess_1.default.connect();
-        //        return 
         this.server.start();
-        //    });
     };
     HapiApp.prototype.registerBodyParser = function (server) {
         return __awaiter(this, void 0, void 0, function () {

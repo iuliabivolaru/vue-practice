@@ -9,6 +9,14 @@ var postSchema = new mongoose_1.Schema({
     content: {
         type: String,
         required: true
+    },
+    createdAt: {
+        type: Date,
+        required: true
+    },
+    likesNumber: {
+        type: String,
+        required: false
     }
 }, { collection: 'posts' });
 exports.postModel = mongoose_1.model('post', postSchema);

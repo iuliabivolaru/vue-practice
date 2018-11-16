@@ -19,4 +19,8 @@ export class CRUDRepository<T extends mongoose.Document>  {
         return this.model.create(tweet);
     }
 
+    public put(tweet: Tweet): Promise<T | null> {
+        return this.model.findOneAndUpdate(tweet.createdAt, tweet, { new: true }).exec();
+    }
+
 }

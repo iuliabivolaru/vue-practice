@@ -13,9 +13,6 @@ class HapiApp {
             host: 'localhost',
             port: 3000
         });
-        // this.registerBodyParser(this.server).then(
-        //   () => {
-        //        RegisterRoutes(this.server);
         this.server.route({
             method: 'GET',
             path: '/posts',
@@ -23,7 +20,6 @@ class HapiApp {
                 SuperController.setCreatedHTTPStatus();
                 return PostService.retrieve()
                     .then((posts: any) => {
-                        // console.info(`Received posts => ${JSON.stringify(posts)}`);
                         if (posts.length) {
                             return posts;
                         }
@@ -39,10 +35,11 @@ class HapiApp {
             method: 'POST',
             path: '/posts',
             handler: function (request, h) {
-                console.log("ggggg");
                 let tweet = new Tweet();
                 tweet.title = (request.payload as any).title;
                 tweet.content = (request.payload as any).content;
+                tweet.likesNumber = (request.payload as any).likesNumber;
+                tweet.createdAt = (request.payload as any).createdAt;
                 SuperController.setCreatedHTTPStatus();
                 console.info("Tweet" + JSON.stringify(tweet));
                 return PostService.post(tweet)
@@ -54,14 +51,34 @@ class HapiApp {
                         console.error(err.message);
                         throw err;
                     });
-                console.info(`Posting => ` + JSON.stringify(tweet));
+                return tweet;
+            }
+        });
+        this.server.route({
+            method: 'POST',
+            path: '/likes',
+            handler: function (request, h) {
+                let tweet = new Tweet();
+                tweet.title = (request.payload as any).title;
+                tweet.content = (request.payload as any).content;
+                tweet.likesNumber = (request.payload as any).likesNumber;
+                tweet.createdAt = (request.payload as any).createdAt;
+                SuperController.setCreatedHTTPStatus();
+                console.info("Tweet" + JSON.stringify(tweet));
+                return PostService.put(tweet)
+                    .then((post: any) => {
+                        console.info(`Putting => ${JSON.stringify(tweet)}`);
+                        SuperController.setStatus(201);
+                        return post;
+                    }).catch((err: any) => {
+                        console.error(err.message);
+                        throw err;
+                    });
                 return tweet;
             }
         });
         DataAccess.connect();
-        //        return 
         this.server.start();
-        //    });
     }
 
     public async registerBodyParser(server: Hapi.Server): Promise<void> {

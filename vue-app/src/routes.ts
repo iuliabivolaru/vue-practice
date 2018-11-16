@@ -1,42 +1,11 @@
 // TODO: Replace this with HAPI middleware stuff
 /* tslint:disable */
 import { Controller, ValidateParam, FieldErrors, ValidateError, TsoaRoute } from 'tsoa';
-import { PostController } from './controller/PostController';
 
 const models: TsoaRoute.Models = {
-    "Tweet": {
-        "properties": {
-            "title": { "dataType": "string", "required": true },
-            "content": { "dataType": "string", "required": true },
-        },
-    },
 };
 
 export function RegisterRoutes(server: any) {
-    server.route({
-        method: 'get',
-        path: '/posts',
-        options: {
-            handler: (request: any, h: any) => {
-                const args = {
-                };
-
-                let validatedArgs: any[] = [];
-                try {
-                    validatedArgs = getValidatedArgs(args, request);
-                } catch (err) {
-                    return h
-                        .response(err)
-                        .code(err.status || 500);
-                }
-
-                const controller = new PostController();
-
-                const promise = controller.retrieve.apply(controller, validatedArgs);
-                return promiseHandler(controller, promise, request, h);
-            }
-        }
-    });
 
 
     function isController(object: any): object is Controller {
