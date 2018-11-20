@@ -27,7 +27,10 @@
             <div class="message-body" v-text="t.content">
             </div>
             <i class="fa fa-thumbs-up" style="margin-left:2%;margin-bottom:2%" v-on:click="like(t)">  {{t.likesNumber}} people</i>
+          <div>
+            <input class="input" placeholder="Write a comment...">
           </div>
+      </div>
     </div>
 </template>
 
