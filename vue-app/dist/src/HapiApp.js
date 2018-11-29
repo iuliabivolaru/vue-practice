@@ -62,6 +62,7 @@ var HapiApp = /** @class */ (function () {
             method: 'GET',
             path: '/posts',
             handler: function (request, h) {
+                console.log("get");
                 SuperController_1.default.setCreatedHTTPStatus();
                 return PostService_1.default.retrieve()
                     .then(function (posts) {
@@ -119,7 +120,6 @@ var HapiApp = /** @class */ (function () {
                     console.error(err.message);
                     throw err;
                 });
-                return tweet;
             }
         });
         DataAccess_1.default.connect();

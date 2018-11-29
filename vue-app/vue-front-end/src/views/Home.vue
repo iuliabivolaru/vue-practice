@@ -41,7 +41,7 @@ export default {
       tweet: { title: "", content: "", createdAt: null, likesNumber: 0 }
     };
   },
-  mounted() {
+  created() {
     this.getTweets();
   },
   methods: {
@@ -55,8 +55,13 @@ export default {
       params.append("content", tweet.content);
       params.append("createdAt", tweet.createdAt);
       params.append("likesNumber", ++tweet.likesNumber);
-      axios
-        .post("http://localhost:3000/likes", params)
+      axios({
+        method: "post",
+        url: "http://localhost:3000/likes",
+        data: params,
+        crossdomain: true
+      })
+        // .put("http://localhost:3000/likes", params)
         .then(response => {
           console.log("PUT response:" + JSON.stringify(response));
           return response.data;

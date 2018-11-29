@@ -7,7 +7,6 @@ describe('form-tweet component', () => {
     let $mounted = new Vue(FormTweetComponent).$mount();
 
     test('verify the component`s snapshot', () => {
-        let $mounted = new Vue(FormTweetComponent).$mount();
         let $html = $mounted.$el.outerHTML
         expect($html).toMatchSnapshot();
     })
